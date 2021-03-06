@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'zahra demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'AkayaTelivigala'
       ),
       home: MyHomePage(),
     );
