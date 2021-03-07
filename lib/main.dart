@@ -4,6 +4,7 @@ import 'package:lorem_ipsum/login.dart';
 import 'package:lorem_ipsum/navigation.dart';
 
 import 'carte.dart';
+import 'numbers.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'zahra demo',
       theme:
           ThemeData(primarySwatch: Colors.pink, fontFamily: 'AkayaTelivigala'),
-      home: NavigationScreen(),
+      home: Numberscreen (),
     );
   }
 }
