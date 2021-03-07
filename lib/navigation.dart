@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lorem_ipsum/temoignage.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -12,12 +13,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      backgroundColor: Colors.pink.shade100,
       drawer: Drawer(
         child: NavigationRail(
           selectedIndex: index,
           extended: true,
           onDestinationSelected: (value) {
-            // Navigator.of(context).pop();
+            Navigator.of(context).pop();
             setState(() {
               index = value;
             });
@@ -73,6 +75,37 @@ class _NavigationScreenState extends State<NavigationScreen> {
             ),
           ],
         ),
+      ),
+      body: IndexedStack(
+        index: index,
+        children: [
+          Container(
+            height: 50,
+            width: 50,
+            color: Colors.green,
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            color: Colors.blue,
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            color: Colors.pink,
+          ),
+          Temoignage(),
+          Container(
+            height: 50,
+            width: 50,
+            color: Colors.black,
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            color: Colors.teal,
+          ),
+        ],
       ),
     );
   }
