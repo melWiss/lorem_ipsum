@@ -12,7 +12,7 @@ class Emergencyclass extends StatelessWidget {
               child: Material(
                 elevation: 4,
                 borderRadius: BorderRadius.circular(200),
-                color: Colors.pink[900],
+                color: Colors.pink,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40,
