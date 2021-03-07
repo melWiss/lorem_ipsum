@@ -14,11 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'zahra demo',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        fontFamily: 'AkayaTelivigala'
-      ),
-      home: Carteclass(),
+      theme:
+          ThemeData(primarySwatch: Colors.pink, fontFamily: 'AkayaTelivigala'),
+      home: NavigationScreen(),
     );
   }
 }

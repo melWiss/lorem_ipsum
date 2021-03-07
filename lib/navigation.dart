@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lorem_ipsum/carte.dart';
+import 'package:lorem_ipsum/emergency.dart';
 import 'package:lorem_ipsum/temoignage.dart';
 
 class NavigationScreen extends StatefulWidget {
@@ -56,7 +58,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             NavigationRailDestination(
               icon: Icon(Icons.chat_outlined),
               selectedIcon: Icon(Icons.chat),
-              label: Text("Chat Bot"),
+              label: Text("Talk with Hbiba"),
             ),
             NavigationRailDestination(
               icon: Icon(Icons.forum_outlined),
@@ -84,22 +86,14 @@ class _NavigationScreenState extends State<NavigationScreen> {
             width: 50,
             color: Colors.green,
           ),
-          Container(
-            height: 50,
-            width: 50,
-            color: Colors.blue,
-          ),
+          Emergencyclass(),
           Container(
             height: 50,
             width: 50,
             color: Colors.pink,
           ),
           Temoignage(),
-          Container(
-            height: 50,
-            width: 50,
-            color: Colors.black,
-          ),
+          Carteclass(),
           Container(
             height: 50,
             width: 50,
