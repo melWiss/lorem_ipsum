@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'zahra demo',
       theme: ThemeData(
         primarySwatch: Colors.pink,
+        fontFamily: 'AkayaTelivigala'
       ),
       home: NavigationScreen(),
     );
