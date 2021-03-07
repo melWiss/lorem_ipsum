@@ -63,7 +63,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             NavigationRailDestination(
               icon: Icon(Icons.forum_outlined),
               selectedIcon: Icon(Icons.forum),
-              label: Text("Temoignage"),
+              label: Text("Other Experiences"),
             ),
             NavigationRailDestination(
               icon: Icon(Icons.map_outlined),
