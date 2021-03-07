@@ -12,11 +12,10 @@ class Temoignage extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: InkWell(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>
-                      TemoignageDetails(temoignage: temoignages[index]),
-                ),
+              showDialog(
+                context: context,
+                builder: (context) =>
+                    TemoignageDetails(temoignage: temoignages[index]),
               );
             },
             child: Material(

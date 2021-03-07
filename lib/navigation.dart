@@ -13,6 +13,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      backgroundColor: Colors.pink.shade100,
       drawer: Drawer(
         child: NavigationRail(
           selectedIndex: index,
