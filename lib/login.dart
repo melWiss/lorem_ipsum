@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lorem_ipsum/registration.dart';
 
 class Loginscreen extends StatelessWidget {
   @override
@@ -47,7 +48,15 @@ class Loginscreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return Registrationscreen();
+                                    },
+                                  ),
+                                );
+                              },
                               child: Text(
                                 "create account",
                               ),
