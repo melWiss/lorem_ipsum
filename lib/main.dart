@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/login.dart';
+import 'package:lorem_ipsum/navigation.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,10 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'zahra demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
         fontFamily: 'AkayaTelivigala'
       ),
-      home: MyHomePage(),
+      home: NavigationScreen(),
     );
   }
 }
