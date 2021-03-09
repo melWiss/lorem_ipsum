@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/carte.dart';
 import 'package:lorem_ipsum/emergency.dart';
+import 'package:lorem_ipsum/profile.dart';
 import 'package:lorem_ipsum/temoignage.dart';
 
 class NavigationScreen extends StatefulWidget {
@@ -81,11 +82,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       body: IndexedStack(
         index: index,
         children: [
-          Container(
-            height: 50,
-            width: 50,
-            color: Colors.green,
-          ),
+          ProfileScreen(),
           Emergencyclass(),
           Container(
             height: 50,
