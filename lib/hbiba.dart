@@ -27,7 +27,6 @@ class _HabibaScreenState extends State<HabibaScreen> {
         children: [
           Expanded(
             child: Container(
-              color: Colors.black87,
               child: StreamBuilder(
                 stream: channel.stream,
                 builder: (context, snapshot) {
