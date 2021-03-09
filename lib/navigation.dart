@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/carte.dart';
 import 'package:lorem_ipsum/emergency.dart';
+import 'package:lorem_ipsum/hbiba.dart';
 import 'package:lorem_ipsum/profile.dart';
 import 'package:lorem_ipsum/temoignage.dart';
 
@@ -87,11 +88,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         children: [
           ProfileScreen(),
           Emergencyclass(),
-          Container(
-            height: 50,
-            width: 50,
-            color: Colors.pink,
-          ),
+          HabibaScreen(),
           Temoignage(),
           Carteclass(),
           Container(

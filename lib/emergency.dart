@@ -8,19 +8,21 @@ class Emergencyclass extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              child: Material(
-                elevation: 4,
-                borderRadius: BorderRadius.circular(200),
-                color: Colors.pink,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40,
-                    vertical: 80,
-                  ),
-                  child: Text(
-                    "help me",
-                    style: TextStyle(fontSize: 40, color: Colors.white),
+            ClipOval(
+              child: InkWell(
+                onTap: () {},
+                child: Material(
+                  elevation: 4,
+                  color: Colors.pink,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 80,
+                    ),
+                    child: Text(
+                      "help me",
+                      style: TextStyle(fontSize: 40, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
