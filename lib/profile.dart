@@ -89,6 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            isScrollControlled: true,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
@@ -96,69 +97,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             builder: (context) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Add an emergency number:",
-                        style: Assets.subTitle,
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Add an emergency number:",
+                      style: Assets.subTitle,
+                    ),
+                  ),
+                  Divider(
+                    indent: MediaQuery.of(context).size.width * .15,
+                    endIndent: MediaQuery.of(context).size.width * .15,
+                    thickness: 3,
+                    color: Colors.black,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        // hintText: 'Emergency Number',
+                        labelText: 'Emergency Number',
+                        border: OutlineInputBorder(),
                       ),
-                    ),
-                    Divider(
-                      indent: MediaQuery.of(context).size.width * .15,
-                      endIndent: MediaQuery.of(context).size.width * .15,
-                      thickness: 3,
-                      color: Colors.black,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          // hintText: 'Emergency Number',
-                          labelText: 'Emergency Number',
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.numberWithOptions(
-                          signed: false,
-                          decimal: true,
-                        ),
-                        onChanged: (v) {
-                          number = v;
-                        },
+                      keyboardType: TextInputType.numberWithOptions(
+                        signed: false,
+                        decimal: true,
                       ),
+                      onChanged: (v) {
+                        number = v;
+                      },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          user.emrgencyNumbers.add(number);
-                          Navigator.of(context).pop();
-                          setState(() {
-                            number = "";
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Submit",
-                            // style: Assets.subTitle,
-                          ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        user.emrgencyNumbers.add(number);
+                        Navigator.of(context).pop();
+                        setState(() {
+                          number = "";
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Submit",
+                          // style: Assets.subTitle,
                         ),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               );
             },
           );
