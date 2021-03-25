@@ -38,8 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                         ),
-                        Image.network(
-                          user.imgUrl,
+                        Image.asset(
+                          'assets/logo.png',
                           height: 150,
                           width: 150,
                           fit: BoxFit.cover,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/models/temoignage.dart';
-import 'package:lorem_ipsum/temoignage_details.dart';
+import 'temoignage_details.dart';
 
 class Temoignage extends StatelessWidget {
   @override

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lorem_ipsum/carte.dart';
-import 'package:lorem_ipsum/emergency.dart';
-import 'package:lorem_ipsum/hbiba.dart';
-import 'package:lorem_ipsum/profile.dart';
-import 'package:lorem_ipsum/temoignage.dart';
+import 'package:lorem_ipsum/fire.dart';
+import 'carte.dart';
+import 'emergency.dart';
+import 'hbiba.dart';
+import 'profile.dart';
+import 'temoignage.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -16,7 +17,14 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: qawini.logOut,
+          ),
+        ],
+      ),
       backgroundColor: Colors.pink.shade100,
       drawer: Drawer(
         child: Padding(

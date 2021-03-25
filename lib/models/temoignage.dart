@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lorem_ipsum/temoignage.dart';
 
 class TemoignageModel {
   String uid;
