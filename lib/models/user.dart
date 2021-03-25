@@ -4,7 +4,7 @@ class Profile {
   String uid;
   String nickname;
   String email;
-  List<String> emrgencyNumbers;
+  List emergencyNumbers;
   DateTime birthday;
 
   Profile({
@@ -12,7 +12,7 @@ class Profile {
     this.nickname,
     this.email,
     this.uid,
-    this.emrgencyNumbers,
+    this.emergencyNumbers,
   });
 
   Profile.fromMap(Map<String, dynamic> map) {
@@ -20,7 +20,7 @@ class Profile {
     this.nickname = map['nickname'];
     this.email = map['email'];
     this.uid = map['uid'];
-    this.emrgencyNumbers = map['emergencyNumbers'];
+    this.emergencyNumbers = map['emergencyNumbers'];
   }
 
   Map<String, dynamic> toMap() {
@@ -29,21 +29,21 @@ class Profile {
       'nickname': this.nickname,
       'email': this.email,
       'birthday': Timestamp.fromDate(this.birthday),
-      'emrgencyNumbers': this.emrgencyNumbers,
+      'emergencyNumbers': this.emergencyNumbers,
     };
   }
 }
 
-Profile user = Profile(
-  birthday: DateTime.utc(1997, 2, 2),
-  nickname: "biba",
-  uid: "someuserid123654789",
-  email: "hamamamal@ggg.com",
-  emrgencyNumbers: [
-    "25616567",
-    "93184370",
-    "99001250",
-    "41220320",
-    "28616567",
-  ],
-);
+// Profile user = Profile(
+//   birthday: DateTime.utc(1997, 2, 2),
+//   nickname: "biba",
+//   uid: "someuserid123654789",
+//   email: "hamamamal@ggg.com",
+//   emrgencyNumbers: [
+//     "25616567",
+//     "93184370",
+//     "99001250",
+//     "41220320",
+//     "28616567",
+//   ],
+// );

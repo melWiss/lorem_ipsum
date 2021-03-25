@@ -11,6 +11,7 @@ class QawiniFirebase {
   FirebaseStorage storage = FirebaseStorage.instance;
   QawiniFirebase();
 
+  /// this function let's user to login to his account.
   Future signInWithEmail(String email, String password) async {
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
@@ -26,6 +27,7 @@ class QawiniFirebase {
     }
   }
 
+  /// this function let's user to create a new account.
   Future registerWithEmailAndPassword(
       String email, String password, Profile profile) async {
     try {
@@ -36,6 +38,7 @@ class QawiniFirebase {
       );
       var ref = firestore.collection("users").doc(userCredential.user.uid);
       profile.uid = userCredential.user.uid;
+      profile.emergencyNumbers = [];
       await ref.set(profile.toMap());
       await signInWithEmail(email, password);
     } on FirebaseAuthException catch (e) {
@@ -49,8 +52,40 @@ class QawiniFirebase {
     }
   }
 
+  /// this function let's user to sign out form the app.
   logOut() {
     auth.signOut();
+  }
+
+  /// this function gets user data from the cloud.
+  Future<Profile> getUserData({String uid}) async {
+    var ref = firestore.collection("users").doc(uid ?? auth.currentUser.uid);
+    var data = await ref.get();
+    return Profile.fromMap(data.data());
+  }
+
+  /// this function gets user data as a stream.
+  Stream<Profile> getUserDataStream({String uid}) async* {
+    var ref = firestore.collection("users").doc(uid ?? auth.currentUser.uid);
+    var snaps = ref.snapshots();
+    await for (var snap in snaps) {
+      var user = Profile.fromMap(snap.data());
+      yield user;
+    }
+  }
+
+  /// update the user data
+  Future updateUserData(Profile profile) async {
+    var ref = firestore.collection("users").doc(profile.uid);
+    await ref.update(profile.toMap());
+  }
+
+  /// add an emergency number
+  Future addEmergencyNumber(String number) async {
+    var user = await getUserData();
+    user.emergencyNumbers = user.emergencyNumbers ?? [];
+    user.emergencyNumbers.add(number);
+    await updateUserData(user);
   }
 }
 
