@@ -41,7 +41,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   padding: EdgeInsets.all(20),
                   child: Center(
                     child: Text(
-                      "Super Woman",
+                      "Q'awini",
                       style: TextStyle(fontSize: 25, color: Colors.pink),
                     ),
                   ),

@@ -32,11 +32,7 @@ class _HabibaScreenState extends State<HabibaScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasError)
                     return Center(
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        child: CircularProgressIndicator(),
-                      ),
+                      child: Text(snapshot.error.toString()),
                     );
                   else if (snapshot.hasData) {
                     messages.insert(0, snapshot.data);
@@ -53,7 +49,13 @@ class _HabibaScreenState extends State<HabibaScreen> {
                       },
                     );
                   }
-                  return CircularProgressIndicator();
+                  return Center(
+                    child: SizedBox(
+                      child: CircularProgressIndicator(),
+                      height: 40,
+                      width: 40,
+                    ),
+                  );
                 },
               ),
             ),

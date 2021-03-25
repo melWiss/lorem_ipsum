@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/emergency.dart';
 import 'package:lorem_ipsum/login.dart';
 import 'package:lorem_ipsum/navigation.dart';
+import 'package:lorem_ipsum/registration.dart';
 
 import 'carte.dart';
 import 'numbers.dart';
@@ -14,10 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'zahra demo',
+      title: "Q'awini",
       theme:
           ThemeData(primarySwatch: Colors.pink, fontFamily: 'AkayaTelivigala'),
-      home: NavigationScreen(),
+      home: Numberscreen(),
     );
   }
 }
