@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/fire.dart';
+import 'package:lorem_ipsum/screens/settings.dart';
 import 'carte.dart';
 import 'emergency.dart';
 import 'hbiba.dart';
@@ -16,95 +17,139 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var mq = MediaQuery.of(context);
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: qawini.logOut,
+      backgroundColor: Colors.white,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomRight,
+            end: Alignment.topLeft,
+            colors: mq.platformBrightness == Brightness.light
+                ? [
+                    Colors.white,
+                    Colors.white,
+                  ]
+                : [
+                    Colors.black,
+                    Colors.black87,
+                  ],
           ),
-        ],
-      ),
-      backgroundColor: Colors.pink.shade100,
-      drawer: Drawer(
-        child: Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-          child: NavigationRail(
-            selectedIndex: index,
-            extended: true,
-            onDestinationSelected: (value) {
-              Navigator.of(context).pop();
-              setState(() {
-                index = value;
-              });
-            },
-            leading: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Material(
-                color: Colors.white,
-                elevation: 4,
-                borderRadius: BorderRadius.circular(20),
-                clipBehavior: Clip.antiAlias,
-                child: Container(
-                  padding: EdgeInsets.all(20),
-                  child: Center(
-                    child: Text(
-                      "Q'awini",
-                      style: TextStyle(fontSize: 25, color: Colors.pink),
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.purple,
+                    Colors.pink,
+                    Colors.orangeAccent,
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: NavigationRail(
+                    leading: Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).viewPadding.top,
+                      ),
+                      // child: Icon(
+                      //   Icons.favorite,
+                      //   size: 50,
+                      //   color: Colors.white,
+                      //   //color: Colors.black54,
+                      // ),
+                      child: Image.asset(
+                        'assets/logo.png',
+                        height: 50,
+                        width: 50,
+                        fit: BoxFit.cover,
+                      ),
                     ),
+                    selectedIndex: index,
+                    onDestinationSelected: (i) {
+                      setState(() {
+                        index = i;
+                      });
+                    },
+                    unselectedIconTheme: IconThemeData(
+                      color: mq.platformBrightness == Brightness.light
+                          ? Colors.black54
+                          : Colors.white,
+                    ),
+                    selectedIconTheme: IconThemeData(
+                      color: mq.platformBrightness == Brightness.light
+                          ? Colors.white
+                          : Colors.black54,
+                    ),
+                    labelType: NavigationRailLabelType.selected,
+                    unselectedLabelTextStyle: TextStyle(
+                      color: mq.platformBrightness == Brightness.light
+                          ? Colors.black54
+                          : Colors.white,
+                    ),
+                    selectedLabelTextStyle: TextStyle(
+                      color: mq.platformBrightness == Brightness.light
+                          ? Colors.white
+                          : Colors.black54,
+                    ),
+                    backgroundColor: Colors.transparent,
+                    destinations: [
+                      NavigationRailDestination(
+                        icon: Icon(Icons.person_outlined),
+                        selectedIcon: Icon(Icons.person),
+                        label: Text("Profile"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.help_outlined),
+                        selectedIcon: Icon(Icons.help),
+                        label: Text("Emergency"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.chat_outlined),
+                        selectedIcon: Icon(Icons.chat),
+                        label: Text("Hbiba"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.forum_outlined),
+                        selectedIcon: Icon(Icons.forum),
+                        label: Text("Testimony"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.map_outlined),
+                        selectedIcon: Icon(Icons.map),
+                        label: Text("Carte"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.settings_outlined),
+                        selectedIcon: Icon(Icons.settings),
+                        label: Text("Settings"),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-            destinations: [
-              NavigationRailDestination(
-                icon: Icon(Icons.person_outlined),
-                selectedIcon: Icon(Icons.person),
-                label: Text("Profile"),
+            Expanded(
+              child: IndexedStack(
+                index: index,
+                children: [
+                  ProfileScreen(),
+                  Emergencyclass(),
+                  HabibaScreen(),
+                  Temoignage(),
+                  Carteclass(),
+                  SettingsScreen(),
+                ],
               ),
-              NavigationRailDestination(
-                icon: Icon(Icons.help_outlined),
-                selectedIcon: Icon(Icons.help),
-                label: Text("Emergency"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.chat_outlined),
-                selectedIcon: Icon(Icons.chat),
-                label: Text("Talk with Hbiba"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.forum_outlined),
-                selectedIcon: Icon(Icons.forum),
-                label: Text("Other Experiences"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.map_outlined),
-                selectedIcon: Icon(Icons.map),
-                label: Text("Carte"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.more_horiz_outlined),
-                selectedIcon: Icon(Icons.more_horiz),
-                label: Text("About"),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
-      body: IndexedStack(
-        index: index,
-        children: [
-          ProfileScreen(),
-          Emergencyclass(),
-          HabibaScreen(),
-          Temoignage(),
-          Carteclass(),
-          Container(
-            height: 50,
-            width: 50,
-            color: Colors.teal,
-          ),
-        ],
       ),
     );
   }

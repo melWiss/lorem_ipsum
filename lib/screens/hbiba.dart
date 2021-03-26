@@ -20,8 +20,11 @@ class _HabibaScreenState extends State<HabibaScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var mq = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: Assets.secondary,
+      appBar: AppBar(
+        title: Text("Hbiba"),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

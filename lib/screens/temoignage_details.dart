@@ -6,6 +6,7 @@ class TemoignageDetails extends StatelessWidget {
   TemoignageDetails({@required this.temoignage});
   @override
   Widget build(BuildContext context) {
+    var mq = MediaQuery.of(context);
     return Center(
       child: SingleChildScrollView(
         child: Column(
@@ -16,7 +17,7 @@ class TemoignageDetails extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Material(
                 elevation: 4,
-                color: Colors.white,
+                // color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -32,18 +33,23 @@ class TemoignageDetails extends StatelessWidget {
                               bottom: 8,
                               right: 20,
                             ),
-                            child: Icon(Icons.person),
+                            child: Icon(
+                              Icons.person,
+                              color: mq.platformBrightness == Brightness.light
+                                  ? Colors.black
+                                  : Colors.white,
+                            ),
                           ),
                           Text(
                             'Anonymous',
-                            style: TextStyle(fontSize: 22),
+                            style: Theme.of(context).textTheme.headline5,
                           ),
                         ],
                       ),
                       Text(
                         temoignage.text,
                         textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 18),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ],
                   ),

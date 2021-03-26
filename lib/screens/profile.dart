@@ -18,7 +18,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return StreamWidget<Profile>(
       stream: qawini.getUserDataStream(),
       builder: (context, user) => Scaffold(
-        backgroundColor: Assets.secondary,
+        appBar: AppBar(
+          title: Text("Profile"),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: qawini.logOut,
+            )
+          ],
+        ),
         body: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,28 +36,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: ClipOval(
                   child: Container(
                     padding: EdgeInsets.all(5),
-                    color: Colors.black,
+                    color: mq.platformBrightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
                     child: ClipOval(
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 150,
-                            width: 150,
-                            child: Center(
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                                size: 48,
-                              ),
-                            ),
-                          ),
-                          Image.asset(
-                            'assets/logo.png',
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
+                      child: Container(
+                        color: mq.platformBrightness == Brightness.light
+                            ? Colors.white
+                            : Colors.black,
+                        padding: EdgeInsets.all(12),
+                        child: Image.asset(
+                          'assets/logo.png',
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
