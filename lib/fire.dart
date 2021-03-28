@@ -114,6 +114,24 @@ class QawiniFirebase {
     );
     await ref.set(testimony.toMap());
   }
+
+  /// this function makes relation between two users through the qr code scan
+  Future makeRelation(String frienduid) async {
+    var me = await getUserData();
+    var friend = await getUserData(uid: frienduid);
+    me.emergencyUsers = me.emergencyUsers ?? [];
+    friend.emergencyUsers = friend.emergencyUsers ?? [];
+    me.emergencyUsers.add({
+      'uid': frienduid,
+      'nickname': friend.nickname,
+    });
+    friend.emergencyUsers.add({
+      'uid': me.uid,
+      'nickname': me.nickname,
+    });
+    await updateUserData(me);
+    await updateUserData(friend);
+  }
 }
 
 var qawini = QawiniFirebase();

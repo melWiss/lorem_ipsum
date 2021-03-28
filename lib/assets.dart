@@ -46,6 +46,8 @@ class Assets {
     ),
     unselectedWidgetColor: Colors.black54,
     buttonColor: Colors.pink,
+    tabBarTheme: TabBarTheme(
+        labelColor: Colors.purple, unselectedLabelColor: Colors.black54),
     textTheme: TextTheme(
       headline6: TextStyle(
         color: Colors.black,
@@ -122,6 +124,10 @@ class Assets {
     ),
     unselectedWidgetColor: Colors.white,
     buttonColor: Colors.pink,
+    tabBarTheme: TabBarTheme(
+      labelColor: Colors.purple,
+      unselectedLabelColor: Colors.white,
+    ),
     textTheme: TextTheme(
       headline6: TextStyle(
         color: Colors.white,

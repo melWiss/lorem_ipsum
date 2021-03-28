@@ -5,6 +5,7 @@ class Profile {
   String nickname;
   String email;
   List emergencyNumbers;
+  List emergencyUsers;
   DateTime birthday;
 
   Profile({
@@ -12,7 +13,8 @@ class Profile {
     this.nickname,
     this.email,
     this.uid,
-    this.emergencyNumbers,
+    this.emergencyNumbers = const [],
+    this.emergencyUsers = const [],
   });
 
   Profile.fromMap(Map<String, dynamic> map) {
@@ -21,6 +23,7 @@ class Profile {
     this.email = map['email'];
     this.uid = map['uid'];
     this.emergencyNumbers = map['emergencyNumbers'];
+    this.emergencyUsers = map['emergencyUsers'];
   }
 
   Map<String, dynamic> toMap() {
@@ -30,6 +33,7 @@ class Profile {
       'email': this.email,
       'birthday': Timestamp.fromDate(this.birthday),
       'emergencyNumbers': this.emergencyNumbers,
+      'emergencyUsers': this.emergencyUsers,
     };
   }
 }
