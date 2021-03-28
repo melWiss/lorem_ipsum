@@ -106,31 +106,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
           label: Text("Emergency Number"),
           icon: Icon(Icons.add),
           onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              builder: (context) {
-                return Column(
+            qawiniSheet(
+                context,
+                Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Add an emergency number:",
                         style: Assets.subTitle,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Divider(
                       indent: MediaQuery.of(context).size.width * .15,
                       endIndent: MediaQuery.of(context).size.width * .15,
                       thickness: 3,
-                      color: Colors.black,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -176,9 +169,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ],
-                );
-              },
-            );
+                ));
           },
         ),
       ),

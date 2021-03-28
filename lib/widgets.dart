@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/assets.dart';
 
+import 'models/user.dart';
+
 /// this widget have the same functionality as StreamBuilder but with less code
 class StreamWidget<T> extends StatelessWidget {
   final Stream<T> stream;
@@ -101,4 +103,20 @@ class BannerLogo extends StatelessWidget {
       ),
     );
   }
+}
+
+Future qawiniSheet(BuildContext context, Widget child) {
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+      ),
+    ),
+    builder: (context) {
+      return child;
+    },
+  );
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lorem_ipsum/models/temoignage.dart';
 import 'package:lorem_ipsum/models/user.dart';
 
 class QawiniFirebase {
@@ -86,6 +87,32 @@ class QawiniFirebase {
     user.emergencyNumbers = user.emergencyNumbers ?? [];
     user.emergencyNumbers.add(number);
     await updateUserData(user);
+  }
+
+  /// fetch Testimonies in a Stream format
+  Stream<List<Testimony>> streamTestemonies() async* {
+    var ref = firestore.collection("testimonies").snapshots();
+    await for (var snap in ref) {
+      List<Testimony> testies =
+          List<Testimony>.generate(snap.docs.length, (index) {
+        return Testimony.fromMap(snap.docs[index].data());
+      });
+      yield testies;
+    }
+  }
+
+  /// share a testimony with the community
+  Future shareTestimony(bool anonym, String text) async {
+    var ref = firestore.collection("testimonies").doc();
+    var profile = await getUserData();
+    Testimony testimony = Testimony(
+      text: text,
+      uid: profile.uid,
+      nickname: profile.nickname,
+      anonymous: anonym,
+      dateTime: DateTime.now(),
+    );
+    await ref.set(testimony.toMap());
   }
 }
 

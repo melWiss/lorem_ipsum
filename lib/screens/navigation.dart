@@ -102,14 +102,14 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     backgroundColor: Colors.transparent,
                     destinations: [
                       NavigationRailDestination(
-                        icon: Icon(Icons.person_outlined),
-                        selectedIcon: Icon(Icons.person),
-                        label: Text("Profile"),
-                      ),
-                      NavigationRailDestination(
                         icon: Icon(Icons.help_outlined),
                         selectedIcon: Icon(Icons.help),
                         label: Text("Emergency"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.person_outlined),
+                        selectedIcon: Icon(Icons.person),
+                        label: Text("Profile"),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.chat_outlined),
@@ -140,8 +140,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
               child: IndexedStack(
                 index: index,
                 children: [
-                  ProfileScreen(),
                   Emergencyclass(),
+                  ProfileScreen(),
                   HabibaScreen(),
                   Temoignage(),
                   Carteclass(),
