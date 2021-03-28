@@ -10,6 +10,8 @@
         android:label="@string/appName"
         android:icon="@mipmap/qazini_logo"
         android:usesCleartextTraffic="true">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyCszqcylR3NnUC8OuRKDmhMXT_Z029-1mE"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -34,8 +36,6 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
-            <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyCszqcylR3NnUC8OuRKDmhMXT_Z029-1mE"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

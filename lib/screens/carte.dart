@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,6 +11,7 @@ class Carteclass extends StatefulWidget {
 }
 
 class _CarteclassState extends State<Carteclass> {
+  Completer<GoogleMapController> _controller = Completer();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +27,9 @@ class _CarteclassState extends State<Carteclass> {
                 target: LatLng(data.latitude, data.longitude),
                 zoom: 8,
               ),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
               markers: {
                 Marker(
                   markerId: MarkerId(

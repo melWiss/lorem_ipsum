@@ -46,7 +46,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             : Colors.black,
                         padding: EdgeInsets.all(12),
                         child: Image.asset(
-                          'assets/logo.png',
+                          mq.platformBrightness == Brightness.light
+                              ? 'assets/logo_dark.png'
+                              : 'assets/logo_light.png',
                           height: 150,
                           width: 150,
                           fit: BoxFit.cover,

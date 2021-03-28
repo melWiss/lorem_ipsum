@@ -65,10 +65,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
                       //   //color: Colors.black54,
                       // ),
                       child: Image.asset(
-                        'assets/logo.png',
-                        height: 50,
-                        width: 50,
-                        fit: BoxFit.cover,
+                        mq.platformBrightness == Brightness.light
+                            ? 'assets/logo_light.png'
+                            : 'assets/logo_dark.png',
+                        height: 60,
+                        width: 60,
                       ),
                     ),
                     selectedIndex: index,
@@ -85,7 +86,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     selectedIconTheme: IconThemeData(
                       color: mq.platformBrightness == Brightness.light
                           ? Colors.white
-                          : Colors.black54,
+                          : Colors.black87,
                     ),
                     labelType: NavigationRailLabelType.selected,
                     unselectedLabelTextStyle: TextStyle(
@@ -96,7 +97,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     selectedLabelTextStyle: TextStyle(
                       color: mq.platformBrightness == Brightness.light
                           ? Colors.white
-                          : Colors.black54,
+                          : Colors.black87,
                     ),
                     backgroundColor: Colors.transparent,
                     destinations: [
