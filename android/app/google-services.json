@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "494679295032",
+    "project_id": "qawini-1074f",
+    "storage_bucket": "qawini-1074f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494679295032:android:f080c8d216769a3b7952cd",
+        "android_client_info": {
+          "package_name": "com.dscepi.lorem_ipsum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494679295032-gs3m5uckl3ij5blnk332ka87lntdr266.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCszqcylR3NnUC8OuRKDmhMXT_Z029-1mE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494679295032-gs3m5uckl3ij5blnk332ka87lntdr266.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

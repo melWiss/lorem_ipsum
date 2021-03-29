@@ -1,34 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:lorem_ipsum/temoignage.dart';
 
-class TemoignageModel {
+class Testimony {
   String uid;
+  String nickname;
   String text;
   bool anonymous;
+  DateTime dateTime;
 
-  TemoignageModel({this.anonymous, this.text, this.uid});
+  Testimony(
+      {this.anonymous, this.text, this.uid, this.nickname, this.dateTime});
 
-  TemoignageModel.fromMap(Map<String, dynamic> map) {
+  Testimony.fromMap(Map<String, dynamic> map) {
     this.anonymous = map['anonymous'];
     this.text = map['text'];
     this.uid = map['uid'];
+    this.nickname = map['nickname'];
+    this.dateTime = map['dateTime'].toDate();
   }
 
   Map<String, dynamic> toMap() {
     return {
       'uid': this.uid,
+      'nickname': this.nickname,
       'text': this.text,
       'anonymous': this.anonymous,
+      'dateTime': Timestamp.fromDate(this.dateTime),
     };
   }
 }
-
-List<TemoignageModel> temoignages = List<TemoignageModel>.generate(
-  10,
-  (index) => TemoignageModel(
-    anonymous: true,
-    text:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus tristique ornare. Nulla pulvinar non massa sit amet porttitor. Fusce sagittis nisi leo, at auctor metus facilisis eu. Sed id sem ut dui varius faucibus a tempus diam. Vivamus scelerisque ex egestas efficitur dignissim. Nunc maximus felis vitae mollis efficitur. Proin in eros sagittis, convallis sapien viverra, semper metus. Donec accumsan, metus vulputate volutpat ultrices, risus nibh imperdiet enim, ut viverra augue tellus id augue. Proin nec lectus ullamcorper, suscipit augue ut, faucibus enim. Curabitur eget cursus nisl. Nam quis interdum eros, eget pellentesque urna. $index',
-    uid: 'user001',
-  ),
-);

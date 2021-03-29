@@ -1,48 +1,53 @@
-class User {
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class Profile {
   String uid;
   String nickname;
-  String imgUrl;
-  List<String> emrgencyNumbers;
+  String email;
+  List emergencyNumbers;
+  List emergencyUsers;
   DateTime birthday;
 
-  User({
+  Profile({
     this.birthday,
-    this.imgUrl,
     this.nickname,
+    this.email,
     this.uid,
-    this.emrgencyNumbers,
+    this.emergencyNumbers = const [],
+    this.emergencyUsers = const [],
   });
 
-  User.fromMap(Map<String, dynamic> map) {
-    this.birthday = map['birthday'];
-    this.imgUrl = map['imgUrl'];
+  Profile.fromMap(Map<String, dynamic> map) {
+    this.birthday = map['birthday'].toDate();
     this.nickname = map['nickname'];
+    this.email = map['email'];
     this.uid = map['uid'];
-    this.emrgencyNumbers = map['emergencyNumbers'];
+    this.emergencyNumbers = map['emergencyNumbers'];
+    this.emergencyUsers = map['emergencyUsers'];
   }
 
   Map<String, dynamic> toMap() {
     return {
       'uid': this.uid,
       'nickname': this.nickname,
-      'imgUrl': this.imgUrl,
-      'birthday': this.birthday,
-      'emrgencyNumbers': this.emrgencyNumbers,
+      'email': this.email,
+      'birthday': Timestamp.fromDate(this.birthday),
+      'emergencyNumbers': this.emergencyNumbers,
+      'emergencyUsers': this.emergencyUsers,
     };
   }
 }
 
-User user = User(
-  imgUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg',
-  birthday: DateTime.utc(1997, 2, 2),
-  nickname: "biba",
-  uid: "someuserid123654789",
-  emrgencyNumbers: [
-    "25616567",
-    "93184370",
-    "99001250",
-    "41220320",
-    "28616567",
-  ],
-);
+// Profile user = Profile(
+//   birthday: DateTime.utc(1997, 2, 2),
+//   nickname: "biba",
+//   uid: "someuserid123654789",
+//   email: "hamamamal@ggg.com",
+//   emrgencyNumbers: [
+//     "25616567",
+//     "93184370",
+//     "99001250",
+//     "41220320",
+//     "28616567",
+//   ],
+// );
