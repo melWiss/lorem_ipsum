@@ -4,10 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lorem_ipsum/models/temoignage.dart';
 import 'package:lorem_ipsum/models/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:telephony/telephony.dart';
 
 class QawiniFirebase {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -157,6 +160,15 @@ class QawiniFirebase {
       ),
     );
     print(response);
+    var location = await Geolocator.getCurrentPosition();
+    var mapsUrl = "https://www.google.com/maps/dir/?api=1&destination=";
+    Telephony telephony = Telephony.instance;
+    user.emergencyNumbers.forEach((element) {
+      telephony.sendSms(
+          to: element,
+          message:
+              "Help me I'm in danger! my location is $mapsUrl${location.latitude},${location.longitude}");
+    });
   }
 
   /// this function updates user position in the database.

@@ -93,9 +93,16 @@ class _CarteclassState extends State<Carteclass> {
                               height: 70,
                               width: MediaQuery.of(context).size.width * .3,
                               child: Center(
-                                child: Text(
-                                  l[index]['nickname'],
-                                  style: Theme.of(context).textTheme.bodyText1,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.person),
+                                    Text(
+                                      l[index]['nickname'],
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
