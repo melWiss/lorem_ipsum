@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lorem_ipsum/models/temoignage.dart';
 import 'package:lorem_ipsum/models/user.dart';
+import 'package:http/http.dart' as http;
 
 class QawiniFirebase {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -131,6 +135,77 @@ class QawiniFirebase {
     });
     await updateUserData(me);
     await updateUserData(friend);
+  }
+
+  /// this function notifies all subscribed users to this current user that he is in danger.
+  Future saveMe() async {
+    const baseUrl = 'https://boiling-sands-07802.herokuapp.com/notify';
+    var user = await getUserData();
+    var response = await http.post(
+      baseUrl,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode(
+        {
+          "topic": auth.currentUser.uid,
+          "notification": {
+            "title": "Save Me!",
+            "body": "${user.nickname} is in danger!",
+          },
+        },
+      ),
+    );
+    print(response);
+  }
+
+  /// this function updates user position in the database.
+  Future<void> updateUserPosition(GeoPoint geoPoint) async {
+    var ref = firestore.collection("positions").doc(auth.currentUser.uid);
+    try {
+      await ref.update(<String, dynamic>{
+        "position": geoPoint,
+        "uid": auth.currentUser.uid,
+      });
+    } catch (e) {
+      await ref.set(<String, dynamic>{
+        "position": geoPoint,
+        "uid": auth.currentUser.uid,
+      });
+    }
+  }
+
+  /// this function get friend's locations in the map
+  Future<Set<Marker>> getFriendsPositions() async {
+    Set<Marker> markers = {};
+    var user = await getUserData();
+    try {
+      var l = [];
+      user.emergencyUsers.forEach((element) {
+        l.add(element['uid']);
+      });
+      var ref = await firestore
+          .collection("positions")
+          .where("uid", whereIn: l)
+          .get();
+      ref.docs.forEach((element) {
+        markers.add(
+          Marker(
+            markerId: MarkerId(element.id),
+            position: LatLng(
+              (element.data()['position'] as GeoPoint).latitude,
+              (element.data()['position'] as GeoPoint).longitude,
+            ),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueRose,
+            ),
+          ),
+        );
+      });
+      return markers;
+    } catch (e) {
+      throw e;
+    }
   }
 }
 

@@ -34,10 +34,10 @@ dependencies:
   dialog_flowtter: "^0.2.0"
   google_maps_flutter: "0.5.30"
   geolocator: "^6.2.1"
-  # majascan: "^0.4.0"
   flutter_barcode_scanner: "^1.0.2"
   qr_flutter: "^4.0.0"
   telephony: "^0.1.1"
+  http: "0.12.2"
 
 
 

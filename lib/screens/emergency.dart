@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lorem_ipsum/fire.dart';
 
 class Emergencyclass extends StatelessWidget {
   @override
@@ -13,7 +14,9 @@ class Emergencyclass extends StatelessWidget {
           children: [
             ClipOval(
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  qawini.saveMe();
+                },
                 child: Material(
                   elevation: 4,
                   color: Colors.pink,

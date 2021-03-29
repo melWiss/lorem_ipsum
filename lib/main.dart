@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/assets.dart';
 import 'package:lorem_ipsum/fire.dart';
+import 'package:lorem_ipsum/notifs.dart';
 import 'package:lorem_ipsum/screens/emergency.dart';
 import 'package:lorem_ipsum/screens/login.dart';
 import 'package:lorem_ipsum/screens/navigation.dart';
@@ -13,7 +15,20 @@ import 'screens/carte.dart';
 import 'screens/numbers.dart';
 import 'widgets.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  if (message.notification != null) {
+    print('Message also contained a notification: ${message.notification}');
+    notify(message.notification.title, message.notification.body);
+  }
+}
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(MyApp());
 }
 
