@@ -63,10 +63,10 @@ class QawiniFirebase {
   /// this function let's user to sign out form the app.
   Future logOut() async {
     var user = await getUserData();
-    user.emergencyNumbers.forEach((element) async {
-      messaging.unsubscribeFromTopic(element);
+    user.emergencyUsers.forEach((element) {
+      messaging.unsubscribeFromTopic(element['uid']);
     });
-    await messaging.unsubscribeFromTopic(user.uid);
+    messaging.unsubscribeFromTopic(user.uid);
     auth.signOut();
   }
 
