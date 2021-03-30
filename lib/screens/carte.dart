@@ -54,67 +54,6 @@ class _CarteclassState extends State<Carteclass> {
               );
             },
           ),
-          Positioned(
-            bottom: 8,
-            left: 8,
-            child: Container(
-              height: 80,
-              width: MediaQuery.of(context).size.width * .6,
-              child: FutureWidget<Profile>(
-                future: qawini.getUserData(),
-                builder: (context, profile) {
-                  List l = profile.emergencyUsers;
-                  return ListView.builder(
-                    itemCount: l.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(5),
-                        child: InkWell(
-                          onTap: () {
-                            var p = mrks.where((element) =>
-                                element.markerId.value == l[index]['uid']);
-                            _controller.future.then((c) {
-                              c.animateCamera(
-                                CameraUpdate.newCameraPosition(
-                                  CameraPosition(
-                                    target: LatLng(
-                                      p.first.position.latitude,
-                                      p.first.position.longitude,
-                                    ),
-                                    zoom: 14,
-                                  ),
-                                ),
-                              );
-                            });
-                          },
-                          child: Card(
-                            child: Container(
-                              height: 70,
-                              width: MediaQuery.of(context).size.width * .3,
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.person),
-                                    Text(
-                                      l[index]['nickname'],
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
           Padding(
             padding: EdgeInsets.fromLTRB(
               8,
@@ -122,20 +61,84 @@ class _CarteclassState extends State<Carteclass> {
               8,
               0,
             ),
-            child: Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(8),
-              clipBehavior: Clip.antiAlias,
-              child: Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: Text(
-                    "Map",
-                    style: Theme.of(context).textTheme.headline6,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Material(
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(8),
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(
+                      child: Text(
+                        "Map",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                Container(
+                  height: 55,
+                  width: MediaQuery.of(context).size.width,
+                  child: FutureWidget<Profile>(
+                    future: qawini.getUserData(),
+                    builder: (context, profile) {
+                      List l = profile.emergencyUsers;
+                      return ListView.builder(
+                        itemCount: l.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(right: 5),
+                            child: InkWell(
+                              onTap: () {
+                                var p = mrks.where((element) =>
+                                    element.markerId.value == l[index]['uid']);
+                                _controller.future.then((c) {
+                                  c.animateCamera(
+                                    CameraUpdate.newCameraPosition(
+                                      CameraPosition(
+                                        target: LatLng(
+                                          p.first.position.latitude,
+                                          p.first.position.longitude,
+                                        ),
+                                        zoom: 14,
+                                      ),
+                                    ),
+                                  );
+                                });
+                              },
+                              child: Card(
+                                child: Container(
+                                  height: 70,
+                                  width: MediaQuery.of(context).size.width * .3,
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.person),
+                                        Text(
+                                          l[index]['nickname'],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],

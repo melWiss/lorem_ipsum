@@ -22,144 +22,146 @@ class _RegistrationscreenState extends State<Registrationscreen> {
   Widget build(BuildContext context) {
     var mq = MediaQuery.of(context);
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              top: mq.viewPadding.top,
+      backgroundColor: Colors.white,
+      body: BackgroundWidget(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            QawiniLogo(
+              mq: mq,
             ),
-            child: BannerLogo(),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
               child: Material(
-                color: Colors.pink[100],
-                elevation: 100,
+                clipBehavior: Clip.antiAlias,
+                elevation: 4,
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Text(
-                          'Registration',
-                          style: TextStyle(
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    colors: [
+                      Colors.purple,
+                      Colors.pink,
+                      Colors.orangeAccent,
+                    ],
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                  )),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Register",
+                        style: Theme.of(context).textTheme.headline4,
+                        textAlign: TextAlign.center,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Nickname',
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Nickname',
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          onChanged: (value) => nickname = value,
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (value) => nickname = value,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Email',
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          onChanged: (value) => email = value,
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (value) => email = value,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Password',
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                          ),
-                          obscureText: true,
-                          onChanged: (value) => password = value,
+                        obscureText: true,
+                        onChanged: (value) => password = value,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'confirm password',
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: 'confirm password',
-                          ),
-                          obscureText: true,
-                          onChanged: (value) => confirmPassword = value,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 8),
-                                child: Text(
-                                  'Pick your age:',
-                                  style: TextStyle(
-                                      color: Colors.black45,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                        obscureText: true,
+                        onChanged: (value) => confirmPassword = value,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 8),
+                              child: Text(
+                                'Pick your age:',
+                                style: TextStyle(
+                                    color: Colors.black45,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              OutlinedButton(
-                                child: Text(
-                                  dateTime.toString().substring(0, 10),
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                onPressed: () async {
-                                  dateTime = await showDatePicker(
-                                      context: context,
-                                      initialDate: dateTime,
-                                      firstDate: DateTime(1970),
-                                      lastDate: DateTime(2100));
-                                  setState(() {});
-                                },
+                            ),
+                            OutlinedButton(
+                              child: Text(
+                                dateTime.toString().substring(0, 10),
+                                style: TextStyle(color: Colors.black),
                               ),
-                            ],
-                          ),
+                              onPressed: () async {
+                                dateTime = await showDatePicker(
+                                    context: context,
+                                    initialDate: dateTime,
+                                    firstDate: DateTime(1970),
+                                    lastDate: DateTime(2100));
+                                setState(() {});
+                              },
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                child: !loading
-                                    ? Text("submit")
-                                    : CircularProgressIndicator(),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.white, // background
-                                  onPrimary: Colors.pink[900], // foreground
-                                ),
-                                onPressed: () {
-                                  if (!loading &&
-                                      nickname.isNotEmpty &&
-                                      email.isNotEmpty &&
-                                      password.isNotEmpty &&
-                                      password == confirmPassword) {
-                                    print("registring...");
-                                    profile.nickname = nickname;
-                                    profile.birthday = dateTime;
-                                    profile.email = email;
-                                    qawini
-                                        .registerWithEmailAndPassword(
-                                            email, password, profile)
-                                        .whenComplete(() => setState(() {
-                                              loading = false;
-                                              Navigator.of(context).pop();
-                                            }))
-                                        .catchError((err) {
-                                      print(err.toString());
-                                      setState(() {
-                                        loading = false;
-                                      });
-                                    });
-                                    setState(() {
-                                      loading = true;
-                                    });
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      ElevatedButton(
+                        child: !loading
+                            ? Text("submit")
+                            : CircularProgressIndicator(),
+                        onPressed: () {
+                          if (!loading &&
+                              nickname.isNotEmpty &&
+                              email.isNotEmpty &&
+                              password.isNotEmpty &&
+                              password == confirmPassword) {
+                            print("registring...");
+                            profile.nickname = nickname;
+                            profile.birthday = dateTime;
+                            profile.email = email;
+                            qawini
+                                .registerWithEmailAndPassword(
+                                    email, password, profile)
+                                .whenComplete(() => setState(() {
+                                      loading = false;
+                                      Navigator.of(context).pop();
+                                    }))
+                                .catchError((err) {
+                              print(err.toString());
+                              setState(() {
+                                loading = false;
+                              });
+                            });
+                            setState(() {
+                              loading = true;
+                            });
+                          }
+                        },
+                      ),
+                    ],
                   ),
                   padding: EdgeInsets.all(20),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text("Go Back"),
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
     );
   }

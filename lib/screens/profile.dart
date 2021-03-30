@@ -70,14 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           ? Colors.white
                                           : Colors.black,
                                   padding: EdgeInsets.all(16),
-                                  child: Image.asset(
-                                    mq.platformBrightness == Brightness.light
-                                        ? 'assets/logo_dark.png'
-                                        : 'assets/logo_light.png',
-                                    height: mq.size.height * .2,
-                                    width: mq.size.height * .2,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: QawiniLogo(mq: mq),
                                 ),
                               ),
                             ),
