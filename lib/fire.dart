@@ -61,7 +61,12 @@ class QawiniFirebase {
   }
 
   /// this function let's user to sign out form the app.
-  logOut() {
+  Future logOut() async {
+    var user = await getUserData();
+    user.emergencyUsers.forEach((element) {
+      messaging.unsubscribeFromTopic(element['uid']);
+    });
+    messaging.unsubscribeFromTopic(user.uid);
     auth.signOut();
   }
 
@@ -218,6 +223,11 @@ class QawiniFirebase {
     } catch (e) {
       throw e;
     }
+  }
+
+  /// this function let user to reset his password
+  Future passwordReset(String email) async {
+    await auth.sendPasswordResetEmail(email: email);
   }
 }
 

@@ -8,6 +8,7 @@ import 'emergency.dart';
 import 'hbiba.dart';
 import 'profile.dart';
 import 'temoignage.dart';
+import '../widgets.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -35,22 +36,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     var mq = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.bottomRight,
-            end: Alignment.topLeft,
-            colors: mq.platformBrightness == Brightness.light
-                ? [
-                    Colors.white,
-                    Colors.white,
-                  ]
-                : [
-                    Colors.black,
-                    Colors.black87,
-                  ],
-          ),
-        ),
+      body: BackgroundWidget(
         child: Row(
           children: [
             Container(

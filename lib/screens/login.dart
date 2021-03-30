@@ -16,50 +16,59 @@ class _LoginscreenState extends State<Loginscreen> {
   Widget build(BuildContext context) {
     var mq = MediaQuery.of(context);
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              top: mq.viewPadding.top,
+      backgroundColor: Colors.white,
+      body: BackgroundWidget(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            QawiniLogo(
+              mq: mq,
             ),
-            child: BannerLogo(),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(50, 100, 50, 10),
-            child: Material(
-              color: Colors.pink[100],
-              elevation: 100,
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                child: Column(
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Email',
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Material(
+                clipBehavior: Clip.antiAlias,
+                elevation: 4,
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    colors: [
+                      Colors.purple,
+                      Colors.pink,
+                      Colors.orangeAccent,
+                    ],
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                  )),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Sign In",
+                        style: Theme.of(context).textTheme.headline4,
                       ),
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) => email = value,
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Password',
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (value) => email = value,
                       ),
-                      obscureText: true,
-                      onChanged: (value) => password = value,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                        ),
+                        obscureText: true,
+                        onChanged: (value) => password = value,
+                      ),
+                      ButtonBar(
+                        alignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
                             child: !loading
                                 ? Text("Sign In")
                                 : CircularProgressIndicator(),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white, // background
-                              onPrimary: Colors.pink[900], // foreground
-                            ),
                             onPressed: () async {
                               if (!loading &&
                                   email.isNotEmpty &&
@@ -81,35 +90,44 @@ class _LoginscreenState extends State<Loginscreen> {
                               }
                             },
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return Registrationscreen();
-                                    },
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return Registrationscreen();
+                                  },
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Register",
+                            ),
+                          ),
+                          ElevatedButton(
+                            child: Text("Reset Password"),
+                            onPressed: () {
+                              qawini.passwordReset(email).whenComplete(() {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      "Password reset mail has been sent.",
+                                    ),
                                   ),
                                 );
-                              },
-                              child: Text(
-                                "create account",
-                              ),
-                              style:
-                                  TextButton.styleFrom(primary: Colors.black87),
-                            ),
-                          )
+                              });
+                            },
+                          ),
                         ],
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
+                  padding: EdgeInsets.all(20),
                 ),
-                padding: EdgeInsets.all(20),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

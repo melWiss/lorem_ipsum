@@ -120,3 +120,51 @@ Future qawiniSheet(BuildContext context, Widget child) {
     },
   );
 }
+
+class QawiniLogo extends StatelessWidget {
+  const QawiniLogo({
+    Key key,
+    @required this.mq,
+  }) : super(key: key);
+
+  final MediaQueryData mq;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      mq.platformBrightness == Brightness.light
+          ? 'assets/logo_dark.png'
+          : 'assets/logo_light.png',
+      height: mq.size.height * .2,
+      width: mq.size.height * .2,
+      fit: BoxFit.cover,
+    );
+  }
+}
+
+class BackgroundWidget extends StatelessWidget {
+  final Widget child;
+  BackgroundWidget({this.child});
+  @override
+  Widget build(BuildContext context) {
+    var mq = MediaQuery.of(context);
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomRight,
+          end: Alignment.topLeft,
+          colors: mq.platformBrightness == Brightness.light
+              ? [
+                  Colors.white,
+                  Colors.white,
+                ]
+              : [
+                  Colors.black,
+                  Colors.black87,
+                ],
+        ),
+      ),
+      child: child,
+    );
+  }
+}

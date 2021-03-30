@@ -46,6 +46,18 @@ class Assets {
     ),
     unselectedWidgetColor: Colors.black54,
     buttonColor: Colors.pink,
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: Colors.black87,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    ),
     tabBarTheme: TabBarTheme(
         labelColor: Colors.purple, unselectedLabelColor: Colors.black54),
     textTheme: TextTheme(
@@ -124,6 +136,18 @@ class Assets {
     ),
     unselectedWidgetColor: Colors.white,
     buttonColor: Colors.pink,
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: Colors.white,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    ),
     tabBarTheme: TabBarTheme(
       labelColor: Colors.purple,
       unselectedLabelColor: Colors.white,
